@@ -1,9 +1,11 @@
 package com.epam.brest;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class PriceCalc {
-    public void priceCalculation() {
+    public void priceCalculation() throws IOException {
         Double[] enteredValues = new Double[4];
         Scanner scanner = new Scanner(System.in);
         String inputValue;
@@ -28,6 +30,12 @@ public class PriceCalc {
                     }
                     System.out.println("Price: $" + calcResult);
                     i = 0;
+
+                    FileWriter fileWriter = new FileWriter("//home//stanislav//development//sbuhlayeu-price-calc//calc-price//resources//TransportationCost", true);
+                    fileWriter.write("Price per distance: " + enteredValues[1] + "\nPrice per weight: " + enteredValues[3] + "\nCost: " + calcResult + "\n\n");
+                    fileWriter.flush();
+                    fileWriter.close();
+
                 }
                 default: System.out.println("Please, enter price per kg or Q for exit: ");
             }
@@ -39,6 +47,7 @@ public class PriceCalc {
             }
         } while (!isExitValue(inputValue));
         System.out.println("Finish!");
+
     }
 
     private static boolean isExitValue(String value) {
@@ -56,4 +65,3 @@ public class PriceCalc {
         return checkResult;
     }
 }
-
